@@ -1,0 +1,53 @@
+# G9a inhibitor prediction — default config (paper Dataset 4)
+
+project_root: .
+raw_dir: data/raw/with_solubility
+interim_dir: data/interim
+processed_dir: data/processed
+metrics_dir: outputs/metrics
+models_dir: outputs/models
+figures_dir: outputs/figures
+
+# Dataset variants from the paper:
+#   with_solubility + smote  -> Dataset 4 (best; default)
+#   with_solubility + rus    -> Dataset 3
+#   without_solubility + smote / rus need extra raw files (see README)
+dataset:
+  solubility: with          # with | without
+  balancing: smote          # smote | rus
+  random_state: 1
+  smote_random_state: 0
+  # For without-solubility SMOTE variant that subsamples majority class first:
+  smote_majority_sample: null
+
+train:
+  test_size: 0.20
+  random_state: 5
+  cv_folds: 5
+
+# Paper final model: 5 features from permutation / RF importance
+final_features:
+  - Volume_1
+  - S_relative
+  - S
+  - N_relative
+  - C_relative
+
+final_model:
+  criterion: entropy
+  min_samples_split: 10
+  n_estimators: 200
+  max_depth: 20
+  n_jobs: -1
+  random_state: 42
+
+# Overfitting check: stop before train-test gap exceeds this
+overfitting_gap: 0.05
+
+download:
+  batch_size: 50
+  sleep_seconds: 0.0
+  workers: 8
+  # Resume-friendly chunked downloads of missing coordinate JSONs
+  sid_2d_target_0: SID_2D_target_0.json
+  cid_3d_target_0: CID_3D_target_0.json

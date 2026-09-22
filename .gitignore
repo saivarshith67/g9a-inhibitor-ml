@@ -1,0 +1,33 @@
+# Virtual env / Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.ipynb_checkpoints/
+
+# Original paper clone (kept locally; not part of this repo)
+G9a_clsf/
+
+# Large raw coordinate JSONs (re-download via scripts/01 if missing)
+data/raw/**/SID_2D_target_0.json
+data/raw/**/CID_3D_target_0.json
+data/raw/**/.cache_*/
+
+# Generated datasets / models / figures
+data/interim/
+data/processed/
+outputs/metrics/
+outputs/models/
+outputs/figures/
+outputs/eda/
+
+# Artifacts
+*.joblib
+_nb_extract/
+.paper2code_work/
+.DS_Store
+Thumbs.db
+*.pdf
