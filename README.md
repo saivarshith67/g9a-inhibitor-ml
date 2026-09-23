@@ -35,7 +35,7 @@ Run in order. Each step depends on the previous one’s outputs.
 
 | Step | Script | What it does | Main output |
 |------|--------|--------------|-------------|
-| **00** | `scripts/00_check_data.py` | Check which raw files are present / missing | Console status (exit 1 if coords missing) |
+| **00** | `scripts/00_check_data.py` | Check which raw files are present / missing | Console status (exit 1 only if required tables missing; missing coords continue to 01) |
 | **01** | `scripts/01_download_coordinates.py` | Download missing target_0 2D/3D coords from PubChem | `SID_2D_target_0.json`, `CID_3D_target_0.json` (+ `.cache_*`) |
 | **02** | `scripts/02_build_features.py` | Engineer features from PubChem tables + coords | `data/interim/with_solubility_unbalanced.csv` |
 | **03** | `scripts/03_balance.py` | Balance classes (SMOTE or RUS) | `data/processed/with_solubility_smote.csv` |
