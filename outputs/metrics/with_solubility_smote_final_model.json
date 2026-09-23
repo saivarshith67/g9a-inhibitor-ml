@@ -1,0 +1,36 @@
+{
+  "metrics": {
+    "accuracy": 0.9075,
+    "precision": 0.9468,
+    "recall": 0.8652,
+    "f1": 0.9041,
+    "roc_auc": 0.9079
+  },
+  "confusion_matrix": [
+    [
+      7109,
+      370
+    ],
+    [
+      1025,
+      6579
+    ]
+  ],
+  "n_train": 60329,
+  "n_test": 15083,
+  "features": [
+    "Volume_1",
+    "S_relative",
+    "S",
+    "N_relative",
+    "C_relative"
+  ],
+  "model_params": {
+    "criterion": "entropy",
+    "min_samples_split": 10,
+    "n_estimators": 200,
+    "max_depth": 20,
+    "n_jobs": -1,
+    "random_state": 42
+  }
+}

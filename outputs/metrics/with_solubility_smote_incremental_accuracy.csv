@@ -1,0 +1,34 @@
+n_features,features,accuracy,method
+1,S_relative,0.6631,RF importance
+2,"S_relative,S",0.7475,RF importance
+3,"S_relative,S,Volume_1",0.7933,RF importance
+4,"S_relative,S,Volume_1,N_relative",0.8767,RF importance
+5,"S_relative,S,Volume_1,N_relative,C_relative",0.9106,RF importance
+6,"S_relative,S,Volume_1,N_relative,C_relative,F",0.9102,RF importance
+7,"S_relative,S,Volume_1,N_relative,C_relative,F,Volume_2",0.9107,RF importance
+8,"S_relative,S,Volume_1,N_relative,C_relative,F,Volume_2,F_relative",0.9104,RF importance
+9,"S_relative,S,Volume_1,N_relative,C_relative,F,Volume_2,F_relative,Solubility_at_pH_7_4",0.9246,RF importance
+10,"S_relative,S,Volume_1,N_relative,C_relative,F,Volume_2,F_relative,Solubility_at_pH_7_4,N",0.9261,RF importance
+11,"S_relative,S,Volume_1,N_relative,C_relative,F,Volume_2,F_relative,Solubility_at_pH_7_4,N,O_relative",0.931,RF importance
+1,Volume_1,0.7467,Permutation
+2,"Volume_1,S_relative",0.7729,Permutation
+3,"Volume_1,S_relative,N_relative",0.8641,Permutation
+4,"Volume_1,S_relative,N_relative,S",0.8772,Permutation
+5,"Volume_1,S_relative,N_relative,S,C_relative",0.91,Permutation
+6,"Volume_1,S_relative,N_relative,S,C_relative,XL",0.9208,Permutation
+7,"Volume_1,S_relative,N_relative,S,C_relative,XL,C",0.9202,Permutation
+8,"Volume_1,S_relative,N_relative,S,C_relative,XL,C,Solubility_at_pH_7_4",0.9293,Permutation
+9,"Volume_1,S_relative,N_relative,S,C_relative,XL,C,Solubility_at_pH_7_4,RBC",0.9291,Permutation
+10,"Volume_1,S_relative,N_relative,S,C_relative,XL,C,Solubility_at_pH_7_4,RBC,XY_3D_volume",0.9277,Permutation
+11,"Volume_1,S_relative,N_relative,S,C_relative,XL,C,Solubility_at_pH_7_4,RBC,XY_3D_volume,O_relative",0.9321,Permutation
+1,allAtoms_rel_XZ_3D,0.5024,Chi2
+2,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D",0.5451,Chi2
+3,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D",0.5903,Chi2
+4,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D",0.6645,Chi2
+5,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D,Volume_1",0.7758,Chi2
+6,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D,Volume_1,S",0.8121,Chi2
+7,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D,Volume_1,S,C_rel_YZ_3D",0.8176,Chi2
+8,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D,Volume_1,S,C_rel_YZ_3D,TPSA",0.8492,Chi2
+9,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D,Volume_1,S,C_rel_YZ_3D,TPSA,F",0.8585,Chi2
+10,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D,Volume_1,S,C_rel_YZ_3D,TPSA,F,O",0.8852,Chi2
+11,"allAtoms_rel_XZ_3D,allAtoms_rel_YZ_3D,C_rel_XZ_3D,Volume_1_3D,Volume_1,S,C_rel_YZ_3D,TPSA,F,O,Cl",0.891,Chi2

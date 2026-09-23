@@ -1,0 +1,8 @@
+                      precision    recall  f1-score   support
+
+           other (0)       0.87      0.95      0.91      7479
+active-inhibitor (1)       0.95      0.87      0.90      7604
+
+            accuracy                           0.91     15083
+           macro avg       0.91      0.91      0.91     15083
+        weighted avg       0.91      0.91      0.91     15083

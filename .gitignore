@@ -19,10 +19,7 @@ data/raw/**/.cache_*/
 # Generated datasets / models / figures
 data/interim/
 data/processed/
-outputs/metrics/
 outputs/models/
-outputs/figures/
-outputs/eda/
 
 # Artifacts
 *.joblib
