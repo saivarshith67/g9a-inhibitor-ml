@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Step 06 — train final 5-feature RandomForest (paper optimal model)."""
+"""Step 07 — train final 5-feature RandomForest (paper optimal model)."""
 
 from __future__ import annotations
 
@@ -32,7 +32,9 @@ def main() -> None:
     stem = dataset_stem(cfg)
     path = cfg["processed_dir"] / f"{stem}.csv"
     if not path.exists():
-        raise FileNotFoundError(f"Missing {path}. Run scripts/03_balance.py first.")
+        raise FileNotFoundError(
+            f"Missing {path}. Run scripts/03_balance.py (or create_dataset.py) first."
+        )
 
     df = pd.read_csv(path)
     features = cfg["final_features"]

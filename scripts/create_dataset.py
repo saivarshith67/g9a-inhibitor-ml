@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-"""Create a proper CSV dataset from downloaded PubChem data + coordinate caches.
+"""Convenience shortcut for pipeline steps 02 + 03.
 
-Steps:
-  1. Assemble SID_2D / CID_3D target_0 JSON from ``.cache_*`` if needed
-  2. Engineer features (paper pipeline)
-  3. Write unbalanced CSV
-  4. Optionally balance (SMOTE / RUS) and write processed CSV
+Assembles coordinate JSONs from cache if needed, engineers features, writes the
+unbalanced interim CSV, then optionally balances (SMOTE / RUS) into processed/.
+
+Equivalent to running:
+  python scripts/02_build_features.py
+  python scripts/03_balance.py
 
 Examples:
   python scripts/create_dataset.py
@@ -131,7 +132,7 @@ def main() -> None:
     print(f"  Processed  : {out_path}")
     print(f"  Meta       : {meta_path}")
     print("=" * 60)
-    print("\nNext: python scripts/eda_dataset.py")
+    print("\nNext: python scripts/04_eda_dataset.py")
 
 
 if __name__ == "__main__":

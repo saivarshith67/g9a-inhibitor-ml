@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Step 05 — feature importance (RF / permutation / chi2) + incremental accuracy."""
+"""Step 06 — feature importance (RF / permutation / chi2) + incremental accuracy."""
 
 from __future__ import annotations
 
@@ -26,7 +26,9 @@ def main() -> None:
     stem = dataset_stem(cfg)
     path = cfg["processed_dir"] / f"{stem}.csv"
     if not path.exists():
-        raise FileNotFoundError(f"Missing {path}. Run scripts/03_balance.py first.")
+        raise FileNotFoundError(
+            f"Missing {path}. Run scripts/03_balance.py (or create_dataset.py) first."
+        )
 
     df = pd.read_csv(path)
     results = run_feature_importance(

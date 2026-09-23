@@ -119,18 +119,21 @@ impl/
 
 ---
 
-## Slide 8 — End-to-end pipeline (scripts)
+## Slide 8 — End-to-end pipeline (scripts 00 → 07)
 
-| Stage | Script | Purpose |
-|-------|--------|---------|
-| Check | `00_check_data.py` | Verify raw files present / missing |
-| Download | `01_download_coordinates.py` | Fetch missing target_0 2D/3D coords (resumable) |
-| **Dataset** | `create_dataset.py` | Build proper CSV from downloads + features |
-| **EDA** | `eda_dataset.py` | Explore the generated CSV |
-| Compare | `04_compare_classifiers.py` | Holdout + CV metrics for 5 models |
-| Importance | `05_feature_importance.py` | RF / permutation / chi² + incremental accuracy |
-| Final | `06_train_final.py` | 5-feature RF (paper final model) |
-| All | `run_all.py` | Orchestrate steps |
+| Step | Script | Purpose |
+|------|--------|---------|
+| **00** | `00_check_data.py` | Verify raw files present / missing |
+| **01** | `01_download_coordinates.py` | Fetch missing target_0 2D/3D coords (resumable) |
+| **02** | `02_build_features.py` | Engineer features → interim unbalanced CSV |
+| **03** | `03_balance.py` | Balance classes (SMOTE / RUS) → processed CSV |
+| **04** | `04_eda_dataset.py` | Explore the generated CSV (tables + figures) |
+| **05** | `05_compare_classifiers.py` | Holdout + CV metrics for 5 models |
+| **06** | `06_feature_importance.py` | RF / permutation / chi² + incremental accuracy |
+| **07** | `07_train_final.py` | 5-feature RF (paper final model) |
+| All | `run_all.py` | Orchestrate steps 00–07 |
+
+**Shortcut:** `create_dataset.py` = steps **02 + 03** in one command.
 
 ---
 
@@ -188,7 +191,9 @@ These are required for feature engineering on the majority class (~39k compounds
 **Command**
 
 ```bash
-python scripts/create_dataset.py --balancing smote
+python scripts/02_build_features.py
+python scripts/03_balance.py --balancing smote
+# shortcut: python scripts/create_dataset.py --balancing smote
 ```
 
 **Results**
@@ -226,7 +231,7 @@ From AID 504332 phenotype × activity outcome:
 **Command**
 
 ```bash
-python scripts/eda_dataset.py
+python scripts/04_eda_dataset.py
 ```
 
 **Findings (SMOTE dataset)**
@@ -274,9 +279,9 @@ Other models compared in paper: Decision Tree, Gradient Boosting, XGBoost, SVM; 
 Already implemented:
 
 ```bash
-python scripts/04_compare_classifiers.py
-python scripts/05_feature_importance.py
-python scripts/06_train_final.py --sweep-depth
+python scripts/05_compare_classifiers.py
+python scripts/06_feature_importance.py
+python scripts/07_train_final.py --sweep-depth
 ```
 
 These write:
@@ -296,13 +301,18 @@ cd impl
 pip install -e .
 
 python scripts/00_check_data.py
-# (download already completed)
-python scripts/create_dataset.py --balancing smote
-python scripts/eda_dataset.py
+# (download already completed — or run scripts/01_download_coordinates.py)
+python scripts/02_build_features.py
+python scripts/03_balance.py --balancing smote
+# shortcut: python scripts/create_dataset.py --balancing smote
+python scripts/04_eda_dataset.py
 
-python scripts/04_compare_classifiers.py
-python scripts/05_feature_importance.py
-python scripts/06_train_final.py --sweep-depth
+python scripts/05_compare_classifiers.py
+python scripts/06_feature_importance.py
+python scripts/07_train_final.py --sweep-depth
+
+# or everything at once:
+# python scripts/run_all.py --skip-download --sweep-depth
 ```
 
 Config: `configs/default.yaml` (solubility, balancing, final features, RF params).

@@ -48,6 +48,7 @@ def main() -> None:
         print("\nNext: python scripts/01_download_coordinates.py")
         sys.exit(1)
     print("\nAll required files present. Next: python scripts/02_build_features.py")
+    print("(Or shortcut: python scripts/create_dataset.py)")
 
 
 if __name__ == "__main__":

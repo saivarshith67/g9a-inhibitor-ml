@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Exploratory data analysis on the generated G9a CSV dataset.
+"""Step 04 — exploratory data analysis on the generated G9a CSV dataset.
 
 Produces:
   - Console summary (shape, dtypes, missing, class balance, describe)
@@ -7,9 +7,9 @@ Produces:
   - Figures under outputs/figures/eda/
 
 Examples:
-  python scripts/eda_dataset.py
-  python scripts/eda_dataset.py --csv data/processed/with_solubility_smote.csv
-  python scripts/eda_dataset.py --csv data/interim/with_solubility_unbalanced.csv
+  python scripts/04_eda_dataset.py
+  python scripts/04_eda_dataset.py --csv data/processed/with_solubility_smote.csv
+  python scripts/04_eda_dataset.py --csv data/interim/with_solubility_unbalanced.csv
 """
 
 from __future__ import annotations
@@ -52,7 +52,8 @@ def _resolve_csv(cfg: dict, csv_arg: str | None) -> Path:
     if candidates:
         return candidates[0]
     raise FileNotFoundError(
-        "No dataset CSV found. Run: python scripts/create_dataset.py"
+        "No dataset CSV found. Run: python scripts/02_build_features.py "
+        "then scripts/03_balance.py (or scripts/create_dataset.py)"
     )
 
 
