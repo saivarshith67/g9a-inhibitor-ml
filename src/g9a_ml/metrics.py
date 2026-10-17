@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
+    average_precision_score,
     classification_report,
     confusion_matrix,
     f1_score,
@@ -17,14 +20,45 @@ from sklearn.metrics import (
 )
 
 
-def binary_metrics(y_true, y_pred) -> dict[str, float]:
-    return {
+def binary_metrics(y_true, y_pred, y_score=None) -> dict[str, float]:
+    """Compute binary classification metrics.
+
+    ``roc_auc`` / ``pr_auc`` use ``y_score`` (probabilities or decision scores)
+    when provided; otherwise they fall back to hard predictions.
+    """
+    scores = y_pred if y_score is None else y_score
+    out = {
         "accuracy": round(float(accuracy_score(y_true, y_pred)), 4),
         "precision": round(float(precision_score(y_true, y_pred, zero_division=0)), 4),
         "recall": round(float(recall_score(y_true, y_pred, zero_division=0)), 4),
         "f1": round(float(f1_score(y_true, y_pred, zero_division=0)), 4),
-        "roc_auc": round(float(roc_auc_score(y_true, y_pred)), 4),
     }
+    try:
+        out["roc_auc"] = round(float(roc_auc_score(y_true, scores)), 4)
+    except ValueError:
+        out["roc_auc"] = float("nan")
+    try:
+        out["pr_auc"] = round(float(average_precision_score(y_true, scores)), 4)
+    except ValueError:
+        out["pr_auc"] = float("nan")
+    return out
+
+
+def save_metrics_json(payload: dict[str, Any], path: Path) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    def _default(o: Any) -> Any:
+        if isinstance(o, (np.integer,)):
+            return int(o)
+        if isinstance(o, (np.floating,)):
+            return float(o)
+        if isinstance(o, np.ndarray):
+            return o.tolist()
+        raise TypeError(f"Object of type {type(o)} is not JSON serializable")
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, default=_default)
+    return path
 
 
 def metrics_table(rows: list[dict[str, Any]]) -> pd.DataFrame:

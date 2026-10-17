@@ -27,6 +27,13 @@ dependencies = [
 
 [project.optional-dependencies]
 ann = ["torch>=2.0", "optuna>=3.0"]
+mol_dl = [
+  "torch>=2.0",
+  "transformers>=4.36",
+  "datasets>=2.16",
+  "accelerate>=0.25",
+  "sentencepiece>=0.1.99",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

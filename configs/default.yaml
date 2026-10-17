@@ -51,3 +51,33 @@ download:
   # Resume-friendly chunked downloads of missing coordinate JSONs
   sid_2d_target_0: SID_2D_target_0.json
   cid_3d_target_0: CID_3D_target_0.json
+
+# Structure-aware DL novelty (steps 08–11). Real molecules only — no SMOTE.
+mol_dl:
+  csv: data/processed/mol_with_solubility.csv
+  smiles_col: SMILES
+  target_col: target
+  splits: [scaffold, random]
+  test_size: 0.20
+  val_size: 0.10
+  random_state: 5
+  dmpnn:
+    hidden: 128
+    depth: 3
+    dropout: 0.05
+    ffn_hidden: 128
+    epochs: 20
+    batch_size: 64
+    lr: 0.0001
+    use_solubility: false
+    patience: 5
+  chemberta:
+    # Pretrained SMILES transformer (full fine-tune; not LoRA)
+    model_name: seyonec/ChemBERTa-zinc-base-v1
+    max_length: 128
+    epochs: 3
+    batch_size: 16
+    lr: 0.00002
+    weight_decay: 0.01
+    patience: 2
+    seed: 42

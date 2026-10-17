@@ -27,6 +27,20 @@ python -m venv .venv
 pip install -e .
 # optional ANN extras from the paper:
 pip install -e ".[ann]"
+# structure-aware DL novelty (D-MPNN + ChemBERTa):
+pip install -e ".[mol_dl]"
+```
+
+## DL novelty (steps 08–11)
+
+Adds a **Chemprop-style D-MPNN** and **ChemBERTa** (full fine-tune, not LoRA) on real SMILES.
+No SMOTE — imbalance handled with class weights. Evaluate on **scaffold** and **random** splits.
+
+```bash
+python scripts/08_export_molecules.py
+python scripts/09_train_chemprop.py              # both splits; add --limit 500 to smoke-test
+python scripts/10_train_chemberta.py             # GPU recommended; --limit 500 to smoke-test
+python scripts/11_compare_dl_vs_rf.py
 ```
 
 ## End-to-end pipeline (steps 00 → 07)
@@ -43,6 +57,10 @@ Run in order. Each step depends on the previous one’s outputs.
 | **05** | `scripts/05_compare_classifiers.py` | Train/compare 5 classifiers (holdout + CV) | `outputs/metrics/*_holdout_metrics.csv`, `*_cv_metrics.csv` |
 | **06** | `scripts/06_feature_importance.py` | RF / permutation / chi² importance + plot | Importance CSVs + incremental accuracy figure |
 | **07** | `scripts/07_train_final.py` | Train paper’s final 5-feature RandomForest | `outputs/models/final_rf.joblib` + metrics JSON |
+| **08** | `scripts/08_export_molecules.py` | Export SMILES+labels (no SMOTE) for DL | `data/processed/mol_with_solubility.csv` |
+| **09** | `scripts/09_train_chemprop.py` | Chemprop-style D-MPNN on SMILES | `outputs/metrics/chemprop_*_metrics.json` |
+| **10** | `scripts/10_train_chemberta.py` | Full fine-tune ChemBERTa on SMILES | `outputs/metrics/chemberta_*_metrics.json` |
+| **11** | `scripts/11_compare_dl_vs_rf.py` | RF vs D-MPNN vs ChemBERTa table/figure | `outputs/metrics/novelty_comparison.csv` |
 
 **Optional shortcut (replaces steps 02 + 03):**
 
@@ -79,6 +97,14 @@ python scripts/create_dataset.py --balancing none
         │
         ▼
 07 train final RF model
+
+08 export SMILES (no SMOTE)
+        │
+        ├──► 09 D-MPNN (Chemprop-style)
+        └──► 10 ChemBERTa (full fine-tune)
+                    │
+                    ▼
+              11 compare vs RF
 ```
 
 ## How to run

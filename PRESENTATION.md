@@ -353,13 +353,22 @@ Config: `configs/default.yaml` (solubility, balancing, final features, RF params
 
 ---
 
-## Slide 20 — Next steps (for remaining project work)
+## Slide 20 — Novelty: structure-aware DL
 
-1. Run steps 04–06 on `with_solubility_smote.csv` and record metrics vs paper Table 1  
-2. Overlay feature-importance ordering vs paper Figure 2 / 3  
-3. Show overfitting curves (`max_depth` sweep) vs paper Figure 4  
-4. Optional: RUS dataset (D3), ANN baseline, or without-solubility path  
-5. Package results into final report / demo  
+Paper ANN on tabular features only reached ~65%. Our extension:
+
+1. **Export real SMILES** (step 08) — no SMOTE (synthetic molecules are invalid)  
+2. **Chemprop-style D-MPNN** (step 09) — molecular graph message passing  
+3. **ChemBERTa full fine-tune** (step 10) — pretrained SMILES transformer (not LoRA)  
+4. **Scaffold + random splits**; class-weighted loss; compare to RF via step 11  
+
+```bash
+pip install -e ".[mol_dl]"
+python scripts/08_export_molecules.py
+python scripts/09_train_chemprop.py
+python scripts/10_train_chemberta.py
+python scripts/11_compare_dl_vs_rf.py
+```
 
 ---
 
@@ -367,7 +376,7 @@ Config: `configs/default.yaml` (solubility, balancing, final features, RF params
 
 - G9a inhibitor prediction is a **practical cheminformatics classification** problem on public PubChem data  
 - **Solubility + SMOTE + Random Forest + 5 features** is the paper’s winning recipe (~90% accuracy)  
-- This implementation makes that pipeline **runnable, inspectable, and presentable** as a real ML project  
+- Novelty: **structure-aware DL** (D-MPNN + ChemBERTa) on real SMILES vs paper tabular ANN  
 
 ---
 
