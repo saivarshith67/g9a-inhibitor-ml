@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-10-17T15:21:20.199350+00:00",
+  "raw_dir": "/nfsshare/users/ak/g9a-inhibitor-ml/data/raw/with_solubility",
+  "n_rows_merged": 43121,
+  "n_after_charge_filter": 41711,
+  "n_invalid_smiles": 0,
+  "n_rows": 41711,
+  "target_counts": {
+    "0": 37774,
+    "1": 3937
+  },
+  "balancing": "none",
+  "note": "Real molecules only; no SMOTE. Class imbalance handled at training time.",
+  "csv": "/nfsshare/users/ak/g9a-inhibitor-ml/data/processed/mol_with_solubility.csv"
+}

@@ -1,0 +1,43 @@
+{
+  "model": "chemberta",
+  "pretrained": "seyonec/ChemBERTa-zinc-base-v1",
+  "fine_tune": "full",
+  "split": "random",
+  "metrics": {
+    "accuracy": 0.8407,
+    "precision": 0.2825,
+    "recall": 0.4473,
+    "f1": 0.3463,
+    "roc_auc": 0.7445,
+    "pr_auc": 0.3264
+  },
+  "confusion_matrix": [
+    [
+      6662,
+      894
+    ],
+    [
+      435,
+      352
+    ]
+  ],
+  "classification_report": "                      precision    recall  f1-score   support\n\n           other (0)       0.94      0.88      0.91      7556\nactive-inhibitor (1)       0.28      0.45      0.35       787\n\n            accuracy                           0.84      8343\n           macro avg       0.61      0.66      0.63      8343\n        weighted avg       0.88      0.84      0.86      8343\n",
+  "n_train": 29197,
+  "n_val": 4171,
+  "n_test": 8343,
+  "class_weights": [
+    0.18878651916292769,
+    1.8112134808370723
+  ],
+  "device": "cuda",
+  "config": {
+    "model_name": "seyonec/ChemBERTa-zinc-base-v1",
+    "max_length": 128,
+    "epochs": 3,
+    "batch_size": 16,
+    "lr": 2e-05,
+    "weight_decay": 0.01,
+    "patience": 2,
+    "seed": 42
+  }
+}

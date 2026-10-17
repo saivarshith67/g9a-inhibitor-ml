@@ -1,3 +1,6 @@
+# Local env (GPU index, secrets)
+.env
+
 # Virtual env / Python
 .venv/
 __pycache__/
@@ -18,7 +21,10 @@ data/raw/**/.cache_*/
 
 # Generated datasets / models / figures
 data/interim/
-data/processed/
+data/processed/*
+!data/processed/mol_with_solubility.csv
+!data/processed/dataset_meta_mol.json
+!data/processed/with_solubility_smote.csv
 outputs/models/
 
 # Artifacts

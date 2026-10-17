@@ -13,6 +13,9 @@ def project_root() -> Path:
 
 
 def load_config(config_path: str | Path | None = None) -> dict[str, Any]:
+    from g9a_ml.env import load_project_env
+
+    load_project_env()
     root = project_root()
     path = Path(config_path) if config_path else root / "configs" / "default.yaml"
     with open(path, encoding="utf-8") as f:

@@ -36,6 +36,8 @@ pip install -e ".[mol_dl]"
 Adds a **Chemprop-style D-MPNN** and **ChemBERTa** (full fine-tune, not LoRA) on real SMILES.
 No SMOTE — imbalance handled with class weights. Evaluate on **scaffold** and **random** splits.
 
+Set the GPU in **`.env`** (copy from `.env.example`): `CUDA_VISIBLE_DEVICES=4`. Loaded automatically before PyTorch in steps 09–10; shell `export` still overrides.
+
 ```bash
 python scripts/08_export_molecules.py
 python scripts/09_train_chemprop.py              # both splits; add --limit 500 to smoke-test

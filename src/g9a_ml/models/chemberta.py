@@ -6,6 +6,10 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+from g9a_ml.env import load_project_env
+
+load_project_env()
+
 import numpy as np
 import pandas as pd
 import torch
